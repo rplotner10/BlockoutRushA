@@ -16,9 +16,7 @@ public float upFloatMultiplier = 2f;
 public LayerMask groundLayer;
 private float playerHeight;
 private float raycastDistance;
-//Jump lock so the player does not jump endlessly
-    public int maximumJumps = 1;
-    private int jumpCount = 0;
+
 
 
 void Start()
@@ -37,7 +35,7 @@ void Update()
     Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
     bool isGrounded = Physics.Raycast(rayOrigin, Vector3.down, raycastDistance, groundLayer);
     
-    if (Input.GetButtonDown("Jump") && jumpCount < maximumJumps)
+    if (Input.GetButtonDown("Jump"))
     {
         Jump();
     }
@@ -62,7 +60,6 @@ void MoveYourPlayer()
 
 void Jump()
 {
-   jumpCount++;
     rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
 }
 
